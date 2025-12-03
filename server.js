@@ -77,40 +77,23 @@ function normalizeVendorC(data) {
     };
 }
 
-// Endpoint 1: Data mentah Vendor C (semua produk)
-app.get('/api/resto/raw', (req, res) => {
-    res.json(vendorCData);
-});
+// menampilkan semua data dengan pajak terpisah
+// app.get('/api/resto/raw', (req, res) => {
+//     res.json(vendorCData);
+// });
 
-// Endpoint 2: Data yang sudah dinormalisasi (semua produk)
+// menampilkan data yang sudah ditambahkan pajak
 app.get('/api/resto/normalized', (req, res) => {
     const normalizedData = vendorCData.map(product => normalizeVendorC(product));
     res.json(normalizedData);
 });
 
-// Endpoint 3: Normalisasi produk berdasarkan ID
-app.get('/api/resto/normalized/:id', (req, res) => {
-    const productId = parseInt(req.params.id);
-    const product = vendorCData.find(p => p.id === productId);
-    
-    if (!product) {
-        return res.status(404).json({ 
-            error: "Product not found",
-        });
-    }
-    
-    const normalizedData = normalizeVendorC(product);
-    res.json(normalizedData);
-});
-
-// Endpoint utama
 app.get('/', (req, res) => {
     res.json({ 
         message: "Vendor C Resto & Kuliner API",
         endpoints: {
-            raw_data_all: "/api/resto/raw",
+            // raw_data_all: "/api/resto/raw",
             normalized_all: "/api/resto/normalized",
-            normalized_by_id: "/api/resto/normalized/:id"
         }
     });
 });
