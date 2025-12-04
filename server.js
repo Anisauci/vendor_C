@@ -83,7 +83,7 @@ function normalizeVendorC(data) {
 // });
 
 // menampilkan data yang sudah ditambahkan pajak
-app.get('/api/resto/normalized', (req, res) => {
+app.get('/api/resto', (req, res) => {
     const normalizedData = vendorCData.map(product => normalizeVendorC(product));
     res.json(normalizedData);
 });
@@ -93,7 +93,7 @@ app.get('/', (req, res) => {
         message: "Vendor C Resto & Kuliner API",
         endpoints: {
             // raw_data_all: "/api/resto/raw",
-            normalized_all: "/api/resto/normalized",
+            normalized_all: "/api/resto",
         }
     });
 });
