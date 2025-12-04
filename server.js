@@ -4,7 +4,7 @@ const port = 3600;
 
 const vendorCData = [
     {
-        id: 1,
+        id: 501,
         details: {
             name: "Nasi Tempong",
             category: "Food"
@@ -16,50 +16,50 @@ const vendorCData = [
         stock: 26
     },
     {
-        id: 2,
+        id: 502,
         details: {
             name: "Nasi Bakar",
             category: "Food"
         },
         pricing: {
             base_price: 12000,
-            tax: 2000
+            tax: 1200
         },
         stock: 23
     },
     {
-        id: 3,
+        id: 503,
         details: {
             name: "Dimsum Mentai",
             category: "Food"
         },
         pricing: {
             base_price: 25000,
-            tax: 2000
+            tax: 2500
         },
         stock: 35
     },
     {
-        id: 4,
+        id: 504,
         details: {
             name: "Tomyum Seafood",
             category: "Food"
         },
         pricing: {
             base_price: 30000,
-            tax: 2000
+            tax: 3000
         },
         stock: 28
     },
     {
-        id: 5,
+        id: 505,
         details: {
             name: "Dimsum Keju",
             category: "Food"
         },
         pricing: {
             base_price: 15000,
-            tax: 2000
+            tax: 1500
         },
         stock: 0
     },
@@ -77,25 +77,10 @@ function normalizeVendorC(data) {
     };
 }
 
-// menampilkan semua data dengan pajak terpisah
-// app.get('/api/resto/raw', (req, res) => {
-//     res.json(vendorCData);
-// });
-
-// menampilkan data yang sudah ditambahkan pajak
+// Jika endpoint ini masih ada, maka normalizeVendorC harus didefinisikan.
 app.get('/api/resto', (req, res) => {
     const normalizedData = vendorCData.map(product => normalizeVendorC(product));
     res.json(normalizedData);
-});
-
-app.get('/', (req, res) => {
-    res.json({ 
-        message: "Vendor C Resto & Kuliner API",
-        endpoints: {
-            // raw_data_all: "/api/resto/raw",
-            normalized_all: "/api/resto",
-        }
-    });
 });
 
 app.listen(port, () => {
