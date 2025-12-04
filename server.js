@@ -77,6 +77,10 @@ function normalizeVendorC(data) {
     };
 }
 
+app.get('/', (req, res) => {
+    res.redirect("/api/resto");
+});
+
 // Jika endpoint ini masih ada, maka normalizeVendorC harus didefinisikan.
 app.get('/api/resto', (req, res) => {
     const normalizedData = vendorCData.map(product => normalizeVendorC(product));
