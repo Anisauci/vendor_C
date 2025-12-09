@@ -6,50 +6,62 @@ const products = [
     {
         id: 501,
         details: {
-            name: "Sego Tempong",
+            name: "Nasi Goreng Jawa",
             category: 'Food'
         },
         pricing: {
-            base_price: 25000,
-            tax: 2500
+            base_price: 30000,
+            tax: 3000
         },
-        stock: 50
+        stock: 12
     },
     {
         id: 502,
         details: {
-            name: "Rujak Soto",
+            name: "Dimsum Mentai",
             category: 'Food'
         },
         pricing: {
-            base_price: 20000,
-            tax: 2000
+            base_price: 21000,
+            tax: 2100
         },
-        stock: 35
+        stock: 0
     },
     {
         id: 503,
         details: {
-            name: "Pecel Rawon",
+            name: "Sate Lilit Bali",
             category: 'Food'
         },
         pricing: {
-            base_price: 22000,
-            tax: 2200
+            base_price: 35000,
+            tax: 3500
         },
-        stock: 25
+        stock: 20
     },
     {
         id: 504,
         details: {
-            name: "Kopi Osing",
+            name: "Jus Alpukat",
             category: 'Drink'
         },
         pricing: {
-            base_price: 10000,
-            tax: 1000
+            base_price: 15000,
+            tax: 1500
         },
-        stock: 60
+        stock: 34
+    },
+    {
+        id: 505,
+        details: {
+            name: "Waffle Coklat",
+            category: 'Food'
+        },
+        pricing: {
+            base_price: 17000,
+            tax: 1700
+        },
+        stock: 23
     }
 ];
 
