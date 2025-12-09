@@ -1,92 +1,91 @@
 const express = require('express');
 const app = express();
-const port = 3600;
+const port = 3000;
 
-const vendorCData = [
+const products = [
     {
         id: 501,
         details: {
-            name: "Nasi Tempong",
-            category: "Food"
-        },
-        pricing: {
-            base_price: 20000,
-            tax: 2000
-        },
-        stock: 26
-    },
-    {
-        id: 502,
-        details: {
-            name: "Nasi Bakar",
-            category: "Food"
-        },
-        pricing: {
-            base_price: 12000,
-            tax: 1200
-        },
-        stock: 23
-    },
-    {
-        id: 503,
-        details: {
-            name: "Dimsum Mentai",
-            category: "Food"
+            name: "Sego Tempong",
+            category: 'Food'
         },
         pricing: {
             base_price: 25000,
             tax: 2500
         },
+        stock: 50
+    },
+    {
+        id: 502,
+        details: {
+            name: "Rujak Soto",
+            category: 'Food'
+        },
+        pricing: {
+            base_price: 20000,
+            tax: 2000
+        },
         stock: 35
+    },
+    {
+        id: 503,
+        details: {
+            name: "Pecel Rawon",
+            category: 'Food'
+        },
+        pricing: {
+            base_price: 22000,
+            tax: 2200
+        },
+        stock: 25
     },
     {
         id: 504,
         details: {
-            name: "Tomyum Seafood",
-            category: "Food"
+            name: "Kopi Osing",
+            category: 'Drink'
         },
         pricing: {
-            base_price: 30000,
-            tax: 3000
+            base_price: 10000,
+            tax: 1000
         },
-        stock: 28
-    },
-    {
-        id: 505,
-        details: {
-            name: "Dimsum Keju",
-            category: "Food"
-        },
-        pricing: {
-            base_price: 15000,
-            tax: 1500
-        },
-        stock: 0
-    },
+        stock: 60
+    }
 ];
 
-function normalizeVendorC(data) {
-    const totalPrice = data.pricing.base_price + data.pricing.tax;
-    
-    return {
-        id: data.id.toString(),
-        name: data.details.name,
-        price: totalPrice,
-        stock: data.stock,
-        available: data.stock > 0
-    };
-}
-
 app.get('/', (req, res) => {
-    res.redirect("/api/resto");
+    res.json({
+        message: 'Vendor C API - Resto & Kuliner',
+        status: 'Running',
+        endpoints: {
+            all_products: `GET http://localhost:${port}/api/products`,
+            product_by_id: `GET http://localhost:${port}/api/products/:id`
+        }
+    });
 });
 
-// Jika endpoint ini masih ada, maka normalizeVendorC harus didefinisikan.
-app.get('/api/resto', (req, res) => {
-    const normalizedData = vendorCData.map(product => normalizeVendorC(product));
-    res.json(normalizedData);
+app.get('/api/products', (req, res) => {
+    console.log(`[Vendor C] GET /api/products - ${new Date().toLocaleTimeString()}`);
+    res.json(products);
+});
+
+app.get('/api/products/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const item = products.find(p => p.id === id);
+    
+    if (!item) {
+        return res.status(404).json({
+            success: false,
+            message: `Produk dengan ID ${id} tidak ditemukan`
+        });
+    }
+    
+    res.json(item);
 });
 
 app.listen(port, () => {
-    console.log(`Vendor C server running at http://localhost:${port}`);
+    console.log(`Vendor C API berjalan di: http://localhost:${port}`);
+    console.log(`Total produk: ${products.length}`);
 });
+
+module.exports = app;
